@@ -1,0 +1,12 @@
+인터셉터
+dispatcherServlet이 요청을 받아 컨트롤러에게 요청하기 전 인터셉터가 요청을 가로채는 문지기 역할을 한다
+
+인터셉터 메소드
+preHandle() : 요청이 컨트롤러에게 가기 전에 실행
+postHandle() : 컨트롤러에서 요청 처리 후 다시 dispatcherServlet에게 전달되기 전에 실행
+afterCompletion() : viewResolver에게 뷰를 전송한 후 실행
+
+인터셉터 구현
+인터셉터 클래스 작성
+HandlerInterceptorAdapter 상속 받아 preHandle(), postHandle() , afterCompletion() 오버라이드하여 작성
+servlet-config.xml에서 인터셉터 빈 등록 및 설정을 한다

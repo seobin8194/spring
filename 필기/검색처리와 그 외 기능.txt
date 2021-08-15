@@ -1,0 +1,65 @@
+검색처리
+/board/list 요청 처리할때 한 페이지에 해당하는 글 목록과 페이징 처리 객체를 만든다
+이때 기존에는 PageVO(페이지번호, 한 페이지 당 글 개수)를 받아서 글목록을 얻어 오고 
+PageVO와 전체 글의 개수를 페이징 객체에 SET하여 페이징 객체를 만들었다
+
+검색처리 이후 글목록 요청처리도 기존과 똑같지만 다만 글목록을 얻어오는 것과 페이징 객체에 SET할 전체 글의 개수를 얻어 오는 처리를 검색조건에 따라 달리 한다
+글목록 얻어 오기
+		select * from
+			(
+			select rownum as rn, tbl.* from
+				(
+				select * from mvc_board 
+				where #{condition} like #{keyword}
+				order by board_no desc
+				) tbl
+			)
+		<![CDATA[
+		where rn > (#{page}-1) * #{countPerPage} 
+		and rn <= (#{page} * #{countPerPage})
+		]]>
+검색어로 입력한 글의 전체 개수
+		select count(*) from mvc_board where #{condition} like #{keyword}
+
+따라서 글목록 요청 받을때 사용자가 PageVO와 함께 선택한 검색조건과 검색어를 받는다
+-> mybatis에서는 파라미터를 두개이상 보낼 수 없기때문에 객체로 포장하거나 map으로 묶어야한다 -> SearchVO를 이용한 검색처리
+
+검색조건에 마다 같은 처리를 반복한다. 이는 너무 비효율적이다
+-> 동적 sql문
+
+동적 sql
+그냥 목록, 제목/작성자/내용 검색조건에 따른 목록 모두 하나의 메서드, 하나의 sql문으로 통합한다
+searchVO(검색어 검색조건)를 넘겨받아 검색조건에 따라 where절을 동적으로 변경해준다
+
+검색어 처리 이후 페이지버튼, 한페이지에서 볼 글 개수 선택 버튼, 다음/이전 페이지 버튼,, 으로 요청할때 사용자가 선택한 키워드와 검색조건을 넘겨 검색필터링을 유지한다
+
+사용자가 입력한 검색어와 검색조건이 입력상자에 입력된 상태 유지되게 처리
+
+검색어 입력 후 엔터쳤을때도 검색기능 작동하게 처리
+
+요청 url에 페이지객체와 검색정보를 넘기다보니 uri가 엄청 길어진다
+->UriComponentBuilder를 이용하여 uri만드는 기능을 pageCreator 클래스에  함수로 만든다
+-> ?뒤를 함수로 대체
+
+new 마크
+boardVO에 new마크 표시여부 필드를 선언하고 서비스에서 글목록을 얻어 온 후 글목록을 for문에 돌리면서 현재시간과 비교하여 
+new마크표시여부를 set한다
+
+조회수 증가
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

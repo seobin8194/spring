@@ -1,0 +1,36 @@
+project 생성
+- maven project + spring 모듈 
+1. 인코딩 설정
+   window -> preferences -> enc 검색 -> workspace, css file, html file, jsp file 모두 utf-8로 변경
+2. maven project
+   빌드 툴. 서버측 자원, 외부라이브러리 연결
+   - maven project 생성
+    file -> new -> maven project -> v create a simple project -> group id(도메인 명 거꾸로) artifact id(프로젝트 명)
+   - project explorer
+     src/main/java : 자바파일
+     src/main/resources : spring 설정 파일. xml 파일. 프로퍼티 파일
+     src/test/java, src/test/resources : 테스트
+     poem.xml : 라이브러리, 버전 등 관리  
+3. poem.xml
+   - 라이브러리 추가
+     브러우저에서 메이븐 레파지토리 검색 -> Maven Repository: Search/Browse/Explore(라이브러리 다운받는 홈페이지)
+     -> 원하는 라이브로리 검색 후 선택 -> 버전선택 -> 코드 복사 -> poem.xml에 붙여넣기 -> 네트워크를 통해 라이브러리를 자동으로 다운받음 ->maven프로젝트 업데이트하여 poem.xml파일에서 변경한 내용 반영
+     (alt + f5 혹은 프로젝트 우클릭 -> maven -> update project)
+     C:\Users\정서빈\.m2 -> poem.xml에서 받은 라이브러리가 여기에 저장된다
+   
+- spring project
+spring프로젝트는 maven프로젝트에 template 씌운거
+1. tomcat 설치
+구글에 tomcat.apache.org 검색 -> 왼쪽에 dowloads에서 버전선택(9) -> core에 zip클릭하여 다운로드 
+-> 압축풀기(eclipse와 workspace와 같은 경로에, "대상폴더의 하위에 압축 파일명으로 폴더 생성 후 압축풀기" 체크 해제)
+2. 서버 등록
+servers 탭에서 No servers.. 링크 클릭 -> apache의 설치한 tomcat버전 선택 -> tomcat installation directory에 설치한 tomcat경로 지정(tomcat폴더클릭까지의 경로) -> finish
+servers 탭에 등록된 서버 더블클릭 -> server locations에서 Use Tomcat installation 선택, servers options에서 publish module contexts to separate XML files 선택, http1.1포트번호 8181로 변경(8080은 오라클 포트번호와 겹침) 
+servers 탭에서 실행버튼 클릭하여 서버가 정상적으로 가동되는지 확인 -> 브라우저에 http://localhost:8181 작성했을때 성공화면 나오면 설치완료된 것
+3. 이클립스에 STS설치
+help -> eclipse marketplace -> spring tools 3(standalone edition) 설치 -> spring 개발관점 선택(우측상단 나뭇잎 아이콘)
+4. 프로젝트 생성
+file -> new -> spring legacy project -> 프로젝트이름작성, templates 선택(spring MVC project 선택) -> next
+-> top level 패키지 명 작성 -> finish
+5. 버전 맞추기
+poem.xml파일에서

@@ -1,0 +1,31 @@
+spring 프로젝트 개발 순서
+1. poem.xml에서 버전맞추기
+2. maven repository에서 라이브러리 받아다가 poem.xml에 추가
+3. server 탭에서 server우클릭 -> add and remove 클릭 -> 현 프로젝트만 add 나머지는 remove
+이 과정을 거쳐야 실행이 빠르다
+4. web.xml에서 한글 인코딩 처리
+5. root-context.xml (->mvc-config.xml)
+xml파일 이름을 변경했다면 web.xml의 6 라인 수정을 해야한다
+db관련 설정
+6. servlet-context.xml(->servlet-config.xml)
+xml파일 이름을 변경했다면 web.xml의 23 라인 수정을 해야한다
+dispatcher servlet관련 설정
+
+7. 테이블과 vo클래스 생성
+8. mapper 인터페이스 구현
+9. test모듈에서 테스트
+src/test/java 에 클래스 만들어서 test
+test모듈 실행하는 법 outline 탭에서 메소드 우클릭 -> run as -> JUnit test
+db와 연동되어 동작하는 mapper에 있는 기능들 테스트
+10. 나머지 service controller jsp 구현 및 화면 디자인
+
+화면 디자인시 템플릿을 가져다 쓸때 이미지나 css js ,, 파일에 작성된 경로와 실제 경로가 다르다
+-> 하나도 적용이 안된다
+-> 이는 보안을 위해 실제 프로젝트 전체 경로를 밝히지 않은 것
+-> servlet-config.xml에서 설정가능
+
+내 홈페이지를 하나의 프로젝트로 관리할거면 rootContext(artifactId) 굳이 필요없다
+rootContext설정하려면 severs탭에서 server.xml에서 설정가능
+
+server 설정에서 포트번호 80으로 지정하면 url에 포트번호입력하지 않고 페이지 접근가능
+-> 웹에서는 기본적으로 80포트를 이용하기 때문에 포트번호가 명시되어 있지 않으면 80번이다

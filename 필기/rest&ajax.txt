@@ -1,0 +1,44 @@
+https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html
+REST
+자원을 이름(uri)으로 구분하여 해당 자원의 상태를 주고받는 모든 것을 의미
+
+get방식 /movies          get list of movies
+get방식 /movies/:id      find a movie by id
+post방식 /movies         create a new movie
+put방식 /movies          update an existing movie
+delete방식 /movies      delete an exiting movie
+
+rest가 필요한 이유
+보통 서버를 구축하면 웹브라우저에 최적화되어있다
+
+        브라우저     < --------html--------->   was    <------------java------------> db
+          html                                          java                                         sql
+          css
+          js
+브라우저가 html로 요청하고 서버는 java로 db와 필요한 작업한다
+그러고 jsp파일(+html)로 응답하고 브라우저는 이를 해석하여 화면을 출력한다
+하지만 브라우저가 아닌 java와 kotlin을 사용하는 안드로이드 혹은 objective c와 swift를 사용하는 ios와 서버는 html로 서로 요청응답을 할 수 없다
+이를 반영하여 브라우저, 안드로이드, ios의 모든 요청을 받아서 처리하는 서버를 구축하기 위해 rest를 이용한다
+즉,
+- 애플리케이션 분리 및 통합
+- 다양한 클라이언트의 등장
+- 다양한 브라우저, 아이폰, 안드로이드와 같은 모바일 디바이스에서 통신해야하는 필요성 과 같은 이유로 rest를 사용한다
+
+REST API
+spring에서도 json을 해석할 수 있는 라이브러리를 제공하고 있다
+
+이때 jsp파일(html)대신 브라우저, 안드로이드, ios 모두 해석할 수 있는 요청/응답 통신 수단이 필요하다
+-> json
+
+https://velog.io/@surim014/JSON%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80
+JSON
+모든 형태의 클라이언트와 json으로 요청받고 응답한다
+브라우저에서 html로 요청하긴 하지만 json으로 데이터를 전달하고 서버에서 json을 java로 변환
+응답도 json으로 하고 브러우저는 js로 해석
+안드로이드와 ios도 마찬가지로 json으로 요청하고 json으로 응답받아 자신이 쓰는 언어로 변환
+
+rest방식과 비동기 통신으로 회원관련 기능만들기
+
+
+
+
